@@ -1,0 +1,136 @@
+@model ArabamTR.Controllers.RegisterViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr" class="h-full bg-slate-950">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kayıt Ol - ArabamTR</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col justify-between text-slate-200 selection:bg-rose-500 selection:text-white overflow-x-hidden">
+
+    <!-- Decorative background elements -->
+    <div class="absolute inset-0 -z-10 overflow-hidden">
+        <div class="absolute left-[20%] top-[-10%] h-[600px] w-[600px] rounded-full bg-rose-500/10 blur-[120px]"></div>
+        <div class="absolute right-[20%] bottom-[-10%] h-[600px] w-[600px] rounded-full bg-red-600/10 blur-[120px]"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold tracking-tight bg-gradient-to-r from-rose-500 to-red-500 bg-clip-text text-transparent hover:opacity-90 transition-opacity">
+            Arabam<span class="text-white">TR</span>
+        </a>
+        <a href="/" class="text-sm font-medium text-slate-400 hover:text-white transition-colors duration-200 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Ana Sayfaya Dön
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center px-6 py-12">
+        <div class="w-full max-w-md">
+            
+            <!-- Logo & Title -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-extrabold tracking-tight text-white mb-2">Yeni Hesap Oluştur</h1>
+                <p class="text-sm text-slate-400">Hayalindeki arabaya giden yolda ilk adımı at.</p>
+            </div>
+
+            <!-- Register Card -->
+            <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl shadow-black/50">
+                <form asp-controller="Account" asp-action="Register" method="post" class="space-y-6">
+                    
+                    <!-- Validation Summary -->
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="bg-red-500/10 border border-red-500/20 text-red-400 text-sm rounded-lg p-4 space-y-1">
+                            <div asp-validation-summary="ModelOnly" class="font-medium"></div>
+                        </div>
+                    }
+
+                    <!-- Name Field -->
+                    <div>
+                        <label asp-for="Name" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                            </div>
+                            <input asp-for="Name" class="block w-full pl-10 pr-4 py-3 bg-slate-900/60 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 transition-all duration-200" placeholder="Ad Soyad" autocomplete="name" required />
+                        </div>
+                        <span asp-validation-for="Name" class="text-red-400 text-xs mt-1 block"></span>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div>
+                        <label asp-for="Email" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <input asp-for="Email" type="email" class="block w-full pl-10 pr-4 py-3 bg-slate-900/60 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 transition-all duration-200" placeholder="E-Posta Adresi" autocomplete="email" required />
+                        </div>
+                        <span asp-validation-for="Email" class="text-red-400 text-xs mt-1 block"></span>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label asp-for="Password" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"></label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            </div>
+                            <input asp-for="Password" type="password" class="block w-full pl-10 pr-4 py-3 bg-slate-900/60 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 transition-all duration-200" placeholder="••••••••" autocomplete="new-password" required />
+                        </div>
+                        <span asp-validation-for="Password" class="text-red-400 text-xs mt-1 block"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-3.5 px-4 bg-gradient-to-r from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 text-white font-semibold rounded-xl shadow-lg shadow-rose-500/20 hover:shadow-rose-500/30 focus:outline-none focus:ring-2 focus:ring-rose-500/50 active:scale-[0.98] transition-all duration-200">
+                        Kayıt Ol
+                    </button>
+                </form>
+
+                <!-- Redirect to Login -->
+                <div class="mt-6 text-center text-sm">
+                    <span class="text-slate-400">Zaten hesabın var mı?</span>
+                    <a asp-action="Login" class="font-medium text-rose-400 hover:text-rose-300 transition-colors ml-1">Giriş Yap</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-6 text-xs text-slate-500 border-t border-white/5">
+        &copy; 2026 ArabamTR. Tüm hakları saklıdır.
+    </footer>
+
+    <!-- Client-side validation scripts -->
+    <script src="https://lib/jquery/dist/jquery.min.js"></script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+</body>
+</html>
